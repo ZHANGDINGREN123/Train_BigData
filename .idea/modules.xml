@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Train_BigData.iml" filepath="$PROJECT_DIR$/.idea/Train_BigData.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BigData.iml" filepath="$PROJECT_DIR$/.idea/BigData.iml" />
     </modules>
   </component>
 </project>

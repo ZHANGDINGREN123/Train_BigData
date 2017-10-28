@@ -3,7 +3,7 @@ from flask_migrate import Migrate, MigrateCommand
 from exts import db
 from models import *
 
-from web_core import app
+from BigData import app
 
 manager = Manager(app)
 

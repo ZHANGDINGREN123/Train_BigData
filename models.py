@@ -26,3 +26,11 @@ class SafeProblem(db.Model):
     S_RISKPOINT = db.Column(db.VARCHAR(20))
     S_HANDLEREASULT = db.Column(db.VARCHAR(20))
     D_CHECKDATE = db.Column(db.DATETIME)
+
+
+class SafeNumber(db.Model):
+    __tablename__ = "SafeNumber"
+    DEPT_NAME = db.Column(db.VARCHAR(20), primary_key=True)
+    TIME = db.Column(db.DATETIME, primary_key=True)
+    PROBLEM_TYPE = db.Column(db.VARCHAR(20), primary_key=True)
+    NUMBER = db.Column(db.INT)

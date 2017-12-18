@@ -1,0 +1,653 @@
+{% extends 'base.html' %}
+{% block title %}
+    首页
+{% endblock %}
+{% block content %}
+    <!-- top tiles -->
+    <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="margin-right: 30px;padding-left: 27px">
+            <span class="count_top"><i class="fa fa-user"></i> 本月设备故障总数</span>
+            <div class="count">180个</div>
+            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"> </i>29.9% </i>与上月相比</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="margin-right: 30px;padding-left: 35px">
+            <span class="count_top"><i class="fa fa-user"></i> 上月设备故障总数</span>
+            <div class="count">282个</div>
+            <span class="count_bottom"><i class="green"><i
+                    class="fa fa-sort-asc"></i>15.1% </i> 与上月相比</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="margin-right: 30px;padding-left: 35px">
+            <span class="count_top"><i class="fa fa-clock-o"></i> 平均出现问题时间</span>
+            <div class="count" style="padding-left: 15px">8天</div>
+            <span class="count_bottom"><i class="green"><i
+                    class="fa fa-sort-asc"></i>3% </i> 与上月相比</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="margin-right: 30px;padding-left: 35px">
+            <span class="count_top"><i class="fa fa-users"></i> 平均发现时间</span>
+            <div class="count">3分钟</div>
+            <span class="count_bottom"><i class="red"><i
+                    class="fa fa-sort-desc"></i>8.2% </i> 与上月相比</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="margin-right: 30px;padding-left: 35px">
+            <span class="count_top"><i class="fa fa-clock-o"></i> 平均解决问题时间</span>
+            <div class="count">1.2天</div>
+            <span class="count_bottom"><i class="red"><i
+                    class="fa fa-sort-desc"></i>12% </i> 与上月同日相比</span>
+        </div>
+{#        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">#}
+{#            <span class="count_top"><i class="fa fa-clock-o"></i> 今日支出</span>#}
+{#            <div class="count">500元</div>#}
+{#            <span class="count_bottom"><i class="red"><i#}
+{#                    class="fa fa-sort-desc"></i>12% </i> 与上月同日相比</span>#}
+{#        </div>#}
+    </div>
+    <!-- /top tiles -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>出错频率统计</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div id="mainPeople" style="height:350px;"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="col-md-6">
+                    <form action="" method="post">
+                        <span>查询起始日期:</span>
+                        <input type="text" placeholder="请输入起始日期" name="Date_Begin">
+                        <span>查询终止日期:</span>
+                        <input type="text" placeholder="请输入终止日期" name="Date_End">
+                        <input type="submit"  value="查询">
+{#                        <table>#}
+{#                            <tbody>#}
+{#                                <tr>#}
+{#                                    <td></td>#}
+{#                                    <td>
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td></td>#}
+{#                                    <td></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td></td>#}
+{#                                    <td></td>#}
+{#                                </tr>#}
+{#                            </tbody>#}
+{#                        </table>#}
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>安全词云</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div id="securityWorld" style="height:350px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>故障词云</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div id="faultWorld" style="height:350px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% for k,v in show_S_Security_Word.items() %}
+    <p name="securityWorldKey" style="display: none">{{ k }}</p>
+    <p name="securityWorldValue" style="display: none">{{ v }}</p>
+{% endfor %}
+
+{#<p>故障词云</p>#}
+{% for k,v in show_S_Falut_Word.items() %}
+    <p name="faultWorldKey" style="display: none">{{ k }}</p>
+    <p name="faultWorldValue" style="display: none">{{ v }}</p>
+{% endfor %}
+                    <hr>
+
+
+{% endblock %}
+{% block script %}
+    <script src="../static/echarts.js"></script>
+    <script src="/static/echarts/dist/echarts-wordcloud.js"></script>
+    <script type="text/javascript">
+        var theme = {
+            color: [
+                '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+                '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+            ],
+
+            title: {
+                itemGap: 8,
+                textStyle: {
+                    fontWeight: 'normal',
+                    color: '#408829'
+                }
+            },
+
+            dataRange: {
+                color: ['#1f610a', '#97b58d']
+            },
+
+            toolbox: {
+                color: ['#408829', '#408829', '#408829', '#408829']
+            },
+
+            tooltip: {
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        color: '#408829',
+                        type: 'dashed'
+                    },
+                    crossStyle: {
+                        color: '#408829'
+                    },
+                    shadowStyle: {
+                        color: 'rgba(200,200,200,0.3)'
+                    }
+                }
+            },
+
+            dataZoom: {
+                dataBackgroundColor: '#eee',
+                fillerColor: 'rgba(64,136,41,0.2)',
+                handleColor: '#408829'
+            },
+            grid: {
+                borderWidth: 0
+            },
+
+            categoryAxis: {
+                axisLine: {
+                    lineStyle: {
+                        color: '#408829'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: ['#eee']
+                    }
+                }
+            },
+
+            valueAxis: {
+                axisLine: {
+                    lineStyle: {
+                        color: '#408829'
+                    }
+                },
+                splitArea: {
+                    show: true,
+                    areaStyle: {
+                        color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: ['#eee']
+                    }
+                }
+            },
+            timeline: {
+                lineStyle: {
+                    color: '#408829'
+                },
+                controlStyle: {
+                    normal: {color: '#408829'},
+                    emphasis: {color: '#408829'}
+                }
+            },
+
+            k: {
+                itemStyle: {
+                    normal: {
+                        color: '#68a54a',
+                        color0: '#a9cba2',
+                        lineStyle: {
+                            width: 1,
+                            color: '#408829',
+                            color0: '#86b379'
+                        }
+                    }
+                }
+            },
+            map: {
+                itemStyle: {
+                    normal: {
+                        areaStyle: {
+                            color: '#ddd'
+                        },
+                        label: {
+                            textStyle: {
+                                color: '#c12e34'
+                            }
+                        }
+                    },
+                    emphasis: {
+                        areaStyle: {
+                            color: '#99d2dd'
+                        },
+                        label: {
+                            textStyle: {
+                                color: '#c12e34'
+                            }
+                        }
+                    }
+                }
+            },
+            force: {
+                itemStyle: {
+                    normal: {
+                        linkStyle: {
+                            strokeColor: '#408829'
+                        }
+                    }
+                }
+            },
+            chord: {
+                padding: 4,
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 1,
+                            color: 'rgba(128, 128, 128, 0.5)'
+                        },
+                        chordStyle: {
+                            lineStyle: {
+                                width: 1,
+                                color: 'rgba(128, 128, 128, 0.5)'
+                            }
+                        }
+                    },
+                    emphasis: {
+                        lineStyle: {
+                            width: 1,
+                            color: 'rgba(128, 128, 128, 0.5)'
+                        },
+                        chordStyle: {
+                            lineStyle: {
+                                width: 1,
+                                color: 'rgba(128, 128, 128, 0.5)'
+                            }
+                        }
+                    }
+                }
+            },
+            gauge: {
+                startAngle: 225,
+                endAngle: -45,
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
+                        width: 8
+                    }
+                },
+                axisTick: {
+                    splitNumber: 10,
+                    length: 12,
+                    lineStyle: {
+                        color: 'auto'
+                    }
+                },
+                axisLabel: {
+                    textStyle: {
+                        color: 'auto'
+                    }
+                },
+                splitLine: {
+                    length: 18,
+                    lineStyle: {
+                        color: 'auto'
+                    }
+                },
+                pointer: {
+                    length: '90%',
+                    color: 'auto'
+                },
+                title: {
+                    textStyle: {
+                        color: '#333'
+                    }
+                },
+                detail: {
+                    textStyle: {
+                        color: 'auto'
+                    }
+                }
+            },
+            textStyle: {
+                fontFamily: 'Arial, Verdana, sans-serif'
+            }
+        };
+        if ($("#mainPeople").length) {
+            var mainPeopleChart = echarts.init(document.getElementById('mainPeople'), theme);
+            mainPeopleChart.showLoading();
+            var base = +new Date(2016, 8, 1);
+            var oneDay = 24 * 3600 * 1000;
+            var date = [];
+
+            var data = [Math.random() * 300];
+            var data2 = [Math.random()];
+
+            for (var i = 1; i < 400; i++) {
+                var now = new Date(base += oneDay);
+                date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+                data.push(Math.round((Math.random()) * 20));
+                data2Current = Math.random() / 2 + data[i] / 500;
+                if (data2Current >= 1) {
+                    data2Current = 1
+                }
+                else if (data2Current <= 0) {
+                    data2Current = 0
+                }
+                data2.push(data2Current);
+            }
+
+            option = {
+                title: {
+                    text: '出错频率',
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                toolbox: {
+                    show: !1
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: false,
+                    data: date
+                }],
+                yAxis: [{
+                    type: 'value',
+                    boundaryGap: [0, '100%']
+                }, {
+                    type: 'value',
+                    boundaryGap: [0, '100%']
+                }],
+                dataZoom: [{
+                    start: 0,
+                    end: 10,
+                }],
+                series: [
+                    {
+                        name: '起',
+                        type: 'bar',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        data: data
+                    },
+                    {
+                        name: '发生率',
+                        type: 'bar',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        yAxisIndex: 1,
+                        data: data2
+                    }
+                ]
+            };
+            mainPeopleChart.setOption(option)
+            mainPeopleChart.hideLoading()
+        }
+        if ($("#securityWorld").length) {
+            var securityWorldKey = document.getElementsByName('securityWorldKey');
+            var securityWorldValue = document.getElementsByName('securityWorldValue');
+            var dataName = [];
+            var dataValue = [];
+            for(var i=0;i<securityWorldKey.length;i++){
+                dataName[i] = securityWorldKey[i].innerHTML;
+            }
+            for(var i=0;i<securityWorldValue.length;i++){
+                dataValue[i] = securityWorldValue[i].innerHTML;
+            }
+            console.log(dataName);
+            console.log(dataValue);
+
+            var mainPeopleChart = echarts.init(document.getElementById('securityWorld'));
+            mainPeopleChart.showLoading();
+
+            function createRandomItemStyle() {
+                return {
+                    normal: {
+                        color: 'rgb(' + [
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160)
+                        ].join(',') + ')'
+                    }
+                };
+            }
+
+            option = {
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                series: [{
+                    type: 'wordCloud',
+
+                    shape:'circle',
+
+                    left:'center',
+                    top:'center',
+                    width:'100%',
+                    height:'80%',
+                    right:null,
+                    bottom:null,
+
+                    sizeRange:[12,60],
+
+                    rotationRange:[-90,90],
+                    rotationStep:45,
+
+                    gridSize:8,
+
+                    drawOutBound:false,
+
+                    textStyle:{
+                        normal:{
+                            fontFamily:'sans-serif',
+                            fontWeight:'bold',
+                            color: function () {
+                                return 'rgb(' + [
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160)
+                                ].join(',') + ')'
+                            },
+                        },
+                        emphasis:{
+                            shadowBlur:10,
+                            shadowColor:'#333',
+                        }
+                    },
+                    data:(function (arr1,arr2) {
+                        var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                    })(dataValue,dataName),
+
+{#                    data: [#}
+{#                        {name:dataName[0],value:dataValue[0]},#}
+{#                        {name:dataName[1],value:dataValue[1]},#}
+{#                        {name:dataName[2],value:dataValue[2]},#}
+{#                        {name:dataName[3],value:dataValue[3]},#}
+{#                        {name:dataName[4],value:dataValue[4]},#}
+{#                        {name:dataName[5],value:dataValue[5]},#}
+{#                        {name:dataName[6],value:dataValue[6]},#}
+{#                        {name:dataName[7],value:dataValue[7]},#}
+{#                        {name:dataName[10],value:dataValue[10]},#}
+{#                        {name:dataName[11],value:dataValue[11]},#}
+{#                        {name:dataName[12],value:dataValue[12]},#}
+{#                        {name:dataName[13],value:dataValue[13]},#}
+{#                        {name:dataName[14],value:dataValue[14]},#}
+{#                        {name:dataName[15],value:dataValue[15]},#}
+{#                        {name:dataName[16],value:dataValue[16]},#}
+{#                        {name:dataName[17],value:dataValue[17]},#}
+{#                    ]#}
+                }]
+            };
+
+            mainPeopleChart.setOption(option)
+            mainPeopleChart.hideLoading()
+        }
+        if ($("#faultWorld").length) {
+            var faultWorldKey = document.getElementsByName('faultWorldKey');
+            var faultWorldValue = document.getElementsByName('faultWorldValue');
+            var dataName = [];
+            var dataValue = [];
+            for(var i=0;i<faultWorldKey.length;i++){
+                dataName[i] = faultWorldKey[i].innerHTML;
+            }
+            for(var i=0;i<faultWorldValue.length;i++){
+                dataValue[i] = faultWorldValue[i].innerHTML;
+            }
+            console.log(dataName);
+            console.log(dataValue);
+
+            var faultWorldChart = echarts.init(document.getElementById('faultWorld'));
+            faultWorldChart.showLoading();
+
+
+            option = {
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                series: [{
+                    type: 'wordCloud',
+
+                    shape:'circle',
+
+                    left:'center',
+                    top:'center',
+                    width:'100%',
+                    height:'80%',
+                    right:null,
+                    bottom:null,
+
+                    sizeRange:[12,60],
+
+                    rotationRange:[-90,90],
+                    rotationStep:45,
+
+                    gridSize:8,
+
+                    drawOutBound:false,
+
+                    textStyle:{
+                        normal:{
+                            fontFamily:'sans-serif',
+                            fontWeight:'bold',
+                            color: function () {
+                                return 'rgb(' + [
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160)
+                                ].join(',') + ')'
+                            },
+                        },
+                        emphasis:{
+                            shadowBlur:10,
+                            shadowColor:'#333',
+                        }
+                    },
+                    data:(function (arr1,arr2) {
+                        var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                    })(dataValue,dataName),
+
+                }]
+            };
+
+            faultWorldChart.setOption(option)
+            faultWorldChart.hideLoading()
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% block title %}
+    安全问题
+{% endblock %}
+{% block content %}
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>本月标志性安全问题
+                    <small>问题排序</small>
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <table class="table" id="main_table">
+                    <thead>
+                    <tr>
+                        <th>排序</th>
+                        <th>安全编号</th>
+                        <th>责任部门</th>
+                        <th>违反条款</th>
+                        <th>发卡类别</th>
+                        <th>检查时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+{#                    {% for data in datas %}#}
+{#                        <tr>#}
+{#                            <th>{{ data.ID }}</th>#}
+{#                            <th>{{ data.I_SECURITYID }}</th>#}
+{#                            <th>{{ data.S_RESPONSIBILITYDEPT }}</th>#}
+{#                            <th>{{ data.S_RISKPOINT }}</th>#}
+{#                            <th>{{ data.S_HANDLEREASULT }}</th>#}
+{#                            <th>{{ data.D_CHECKDATE }}</th>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+                        <tr>
+                            <th>1</th>
+                            <th>35942</th>
+                            <th>票厅</th>
+                            <th>BZ96</th>
+                            <th>标准化问题</th>
+                            <th>2017-8-14 15：35：00</th>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <th>35047</th>
+                            <th>候车厅</th>
+                            <th>BZ85</th>
+                            <th>标准化问题</th>
+                            <th>2017-7-28 10：10：00</th>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <th>35942</th>
+                            <th>票厅</th>
+                            <th>BZ96</th>
+                            <th>标准化问题</th>
+                            <th>2017-8-14 15：35：00</th>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <th>30984</th>
+                            <th>其他</th>
+                            <th>K144</th>
+                            <th>红通</th>
+                            <th>2017-5-03 10：25：00</th>
+                        </tr>
+                        <tr>
+                            <th>5</th>
+                            <th>31043</th>
+                            <th>其他</th>
+                            <th>K144</th>
+                            <th>红通</th>
+                            <th>2017-5-04 10：00：00</th>
+                        </tr>
+                        <tr>
+                            <th>6</th>
+                            <th>32867</th>
+                            <th>其他</th>
+                            <th>K144</th>
+                            <th>红通</th>
+                            <th>2017-6-11 15：25：00</th>
+                        </tr>
+                        <tr>
+                            <th>7</th>
+                            <th>35247</th>
+                            <th>候车室</th>
+                            <th>BZ58</th>
+                            <th>标准化问题</th>
+                            <th>2017-7-11 15：35：00</th>
+                        </tr>
+                        <tr>
+                            <th>8</th>
+                            <th>34275</th>
+                            <th>高架候车室</th>
+                            <th>BZ58</th>
+                            <th>标准化问题</th>
+                            <th>2017-8-1 15：35：00</th>
+                        </tr>
+                        <tr>
+                            <th>9</th>
+                            <th>36464</th>
+                            <th>站台</th>
+                            <th>T137</th>
+                            <th>红通</th>
+                            <th>2017-8-24 21：45：00</th>
+                        </tr>
+                        <tr>
+                            <th>10</th>
+                            <th>35849</th>
+                            <th>客技站</th>
+                            <th>T137</th>
+                            <th>红通</th>
+                            <th>2017-8-12 01：20：00</th>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>各区域安全问题</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <div id="safe_bar"
+                     style="height: 350px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative; background-color: transparent;"
+                     _echarts_instance_="ec_1509163677251">
+                    <div style="position: relative; overflow: hidden; width: 685px; height: 350px; cursor: default;">
+                        <canvas width="1370" height="700" data-zr-dom-id="zr_0"
+                                style="position: absolute; left: 0px; top: 0px; width: 685px; height: 350px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                    </div>
+                    <div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color: rgba(0, 0, 0, 0.5); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: Arial, Verdana, sans-serif; line-height: 21px; padding: 5px; left: 522.333px; top: 151px;">
+                        10?<br><span
+                            style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#26B99A"></span>sales
+                        : 20<br><span
+                            style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#34495E"></span>purchases
+                        : 18.8
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script type="application/javascript">
+        var safe_bar_chart = echarts.init(document.getElementById('safe_bar'));
+        safe_bar_chart_option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ['站台','指挥中心','客技站','候车室','票厅','进站口','集中楼','承运区',],
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: '违反安全指令书',
+                        type: 'bar',
+                        barWidth: '60%',
+                        data:[
+                            {value:9450, name:'站台'},
+                            {value:4010, name:'指挥中心'},
+                            {value:2894, name:'客技站'},
+                            {value:3237, name:'候车室'},
+                            {value:2209, name:'信号楼'},
+                            {value:905, name:'进站口'},
+                             {value:539, name:'集中楼'},
+                            {value:403, name:'承运区'},
+                        ],
+                    }
+                ]
+            };
+        safe_bar_chart.setOption(safe_bar_chart_option)
+    </script>
+{% endblock %}

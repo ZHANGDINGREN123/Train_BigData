@@ -1,0 +1,701 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+       <div class="dashboard_graph">
+          <div class="row x_title">
+             <div class="col-md-6">
+                <h3>太原火车站大数据平台 <small>数据可视化</small></h3>
+             </div>
+             <div class="col-md-6">
+                <form action="" method="post">
+    <table>
+        <tbody>
+            <tr>
+                <td>查询起始日期:</td>
+                <td><input type="text" placeholder="请输入起始日期" name="Date_Begin" id="Date_Begin"></td>
+            </tr>
+            <tr>
+                <td>查询终止日期:</td>
+                <td><input type="text" placeholder="请输入终止日期" name="Date_End" id="Date_End"></td>
+            </tr>
+            <tr>
+                <td>请输入发卡部门:</td>
+                <td><input type="text" placeholder="请输入发卡部门" name="Check_Department" id="Check_Department"></td>
+            </tr>
+            <tr>
+                <td>请输入发卡类别:</td>
+                <td><input type="text" placeholder="请输入发卡类别" name="Hand_Result" id="Hand_Result"></td>
+            </tr>
+            <tr>
+                <td>请输入检查人姓名:</td>
+                <td><input type="text" placeholder="请输入检查人姓名" name="Responsibli_Code_two" id="Responsibli_Code_two"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="查询" id="submit"></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+             </div>
+          </div>
+       </div>
+    </div>
+</div>
+
+
+
+<!--第一层图表-->
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="x_panel">
+     <div class="x_title">
+        <h2>数据可视化<small>发卡数量</small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Settings 1</a>
+              </li>
+              <li><a href="#">Settings 2</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+     <div class="x_content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>责任部门</th>
+              <th>发现问题数量</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for k,v in Show_S_RESPONSIBILITYDEPT.items() %}
+                <tr>
+                    <td>#</td>
+                    <td>{{ k }}</td>
+                    <td>{{ v }}</td>
+                    <td>@sxu</td>
+                </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+     </div>
+</div>
+<div class="x_panel">
+   <div class="x_title">
+        <h2>责任部门发现安全问题比例</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+   <div class="x_content">
+        <div id="chart1" style="height: 300px"></div>
+    </div>
+</div>
+  <hr>
+</div>
+<p id="dateBegin" style="display: none">{{ dateBegin }}</p>
+<p id="dateEnd" style="display: none">{{ dateEnd }}</p>
+{% for k,v in Show_S_RESPONSIBILITYDEPT.items() %}
+{#    <p>{{ k }}</p>#}
+{#    <p>{{ v }}</p>#}
+    <p name="FirstFloor" style="display: none;">{{ k }}:{{ v }}</p>
+{% endfor %}
+
+
+
+
+<!--第二层图表-->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+    <h2>检查部门:{{ show_S_Second_Layer__Two_Check_Department1 }}<small>安全问题</small></h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Settings 1</a>
+          </li>
+          <li><a href="#">Settings 2</a>
+          </li>
+        </ul>
+      </li>
+      <li><a class="close-link"><i class="fa fa-close"></i></a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+    </div>
+        <div class="x_content">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>发卡类型</th>
+          <th>{{ show_S_Second_Layer__Two_Check_Department1 }}发卡数量</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for k,v in show_S_Second_Layer_Two_Check_Department.items() %}
+            <tr>
+                <td>#</td>
+                <td>{{ k }}</td>
+                <td>{{ v }}</td>
+                <td>@sxu</td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <!--第二层数据图表-->
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>发卡类型占比 </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="chart2" style="height: 300px"></div>
+        </div>
+    </div>
+<hr>
+</div>
+<span name="titleSecondFloor" style="display: none">{{ show_S_Second_Layer__Two_Check_Department1 }}</span>
+{% for k2,v2 in show_S_Second_Layer_Two_Check_Department.items() %}
+    <p name="SecondFloor" style="display: none">{{ k2 }}:{{ v2 }}</p>
+{% endfor %}
+
+
+
+
+<!--第三层图表-->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+    <h2>发卡部门<small>{{ show_S_Third_Layer_S_Hand_Result1 }}</small></h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Settings 1</a>
+          </li>
+          <li><a href="#">Settings 2</a>
+          </li>
+        </ul>
+      </li>
+      <li><a class="close-link"><i class="fa fa-close"></i></a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+    </div>
+        <div class="x_content">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>发卡人</th>
+          <th>{{ show_S_Second_Layer__Two_Check_Department1 }} {{ show_S_Third_Layer_S_Hand_Result1 }} 发卡数量</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for k,v in show_S_Third_Layer_S_Hand_Result.items() %}
+            <tr>
+                <td>#</td>
+                <td>{{ k }}</td>
+                <td>{{ v }}</td>
+                <td>@sxu</td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <!--第三层数据图表-->
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>{{ show_S_Second_Layer__Two_Check_Department1 }} {{ show_S_Third_Layer_S_Hand_Result1}} 发卡比例 </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="chart3" style="height: 300px"></div>
+        </div>
+    </div>
+<hr>
+</div>
+<span name="titleThirdFloor" style="display: none">{{ show_S_Third_Layer_S_Hand_Result1 }}</span>
+{% for k3,v3 in show_S_Third_Layer_S_Hand_Result.items() %}
+    <p name="ThirdFloor" style="display: none">{{ k3 }}:{{ v3 }}</p>
+{% endfor %}
+
+
+<!--第四层图表-->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <!--第四层数据表格-->
+    <div class="x_panel">
+        <div class="x_title">
+    <h2>责任部门<small>{{ show_S_Third_Layer_S_Hand_Result1 }}</small></h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Settings 1</a>
+          </li>
+          <li><a href="#">Settings 2</a>
+          </li>
+        </ul>
+      </li>
+      <li><a class="close-link"><i class="fa fa-close"></i></a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+    </div>
+        <div class="x_content">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>检查方式</th>
+          <th>{{ show_S_Fourth_Layer_People_Code1 }} 发现{{ show_S_Third_Layer_S_Hand_Result1}}问题数量</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for k,v in show_S_Fourth_Layer_People_Code.items() %}
+            <tr>
+                <td>#</td>
+                <td>{{ k }}</td>
+                <td>{{ v }}</td>
+                <td>@sxu</td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <!--第四层数据图表-->
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>各部门存在的{{ show_S_Third_Layer_S_Hand_Result1}}问题 </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="chart4" style="height: 300px"></div>
+        </div>
+    </div>
+<hr>
+</div>
+<span name="titleFourthFloor" style="display: none">{{ show_S_Fourth_Layer_People_Code1 }}</span>
+{% for k4,v4 in show_S_Fourth_Layer_People_Code.items() %}
+    <p name="FourthFloor" style="display: none">{{ k4 }}:{{ v4 }}</p>
+{% endfor %}
+
+    
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    window.onload = function () {
+
+        var Date_Begin = document.getElementById('Date_Begin');
+        var Date_End = document.getElementById('Date_End');
+        var Check_Department = document.getElementById('Check_Department');
+        var Hand_Result = document.getElementById('Hand_Result');
+        var Responsibli_Code_two = document.getElementById('Responsibli_Code_two');
+
+        var titleSecondFloor =  document.getElementsByName('titleSecondFloor');
+        var titleThirdFloor =  document.getElementsByName('titleThirdFloor');
+        var titleFourthFloor =  document.getElementsByName('titleFourthFloor');
+        var dateBegin = document.getElementById('dateBegin');
+{#        console.log(dateBegin.innerHTML);#}
+        var dateEnd = document.getElementById('dateEnd');
+
+        Date_Begin.value = dateBegin.innerHTML;
+        Date_End.value = dateEnd.innerHTML;
+
+        FirstFloor();
+        var isSecondFloor = document.getElementsByName('SecondFloor');
+        if(isSecondFloor.length != 0){
+            SecondFloor();
+            Check_Department.value = titleSecondFloor[0].innerHTML;
+        }
+        var isThirdFloor = document.getElementsByName('ThirdFloor');
+{#        console.log(isThirdFloor);#}
+        if(isThirdFloor.length != 0){
+            ThirdFloor();
+            Hand_Result.value = titleThirdFloor[0].innerHTML;
+        }
+        var isFourthFloor = document.getElementsByName('titleFourthFloor');
+{#        console.log(isFourthFloor);#}
+        if(isFourthFloor.length != 0){
+            FourthFloor();
+            Responsibli_Code_two.value = titleFourthFloor[0].innerHTML;
+        }
+    }
+     var FirstFloor = function () {
+          var FirstFloor = document.getElementsByName('FirstFloor');
+{#          console.log(FirstFloor);#}
+          var initResult = []
+          var dataName=[];
+          var dataValue=[];
+{#          console.log(FirstFloor.length);#}
+          for(var i=0;i<FirstFloor.length;i++){
+{#              console.log(FirstFloor[i].innerHTML);#}
+              initResult[i] = FirstFloor[i].innerHTML;
+              dataName[i] = initResult[i].split(":")[0];
+              dataValue[i] = initResult[i].split(":")[1];
+{##}
+          }
+{#          console.log(dataValue);#}
+{#          console.log(dataName);#}
+          draw1(dataName,dataValue);
+      }
+     var SecondFloor = function () {
+           var SecondFloor = document.getElementsByName('SecondFloor');
+           var titleSecondFloor = document.getElementsByName('titleSecondFloor');
+           var dataTitle = titleSecondFloor[0].innerHTML;
+{#                           console.log(dataTitle);#}
+           var initResult = []
+           var dataName=[];
+           var dataValue=[];
+{#                           console.log(SecondFloor.length);#}
+           for(var i=0;i<SecondFloor.length;i++){
+{#               console.log(SecondFloor[i].innerHTML);#}
+               initResult[i] = SecondFloor[i].innerHTML;
+               dataName[i] = initResult[i].split(":")[0];
+               dataValue[i] = initResult[i].split(":")[1];
+           }
+{#           console.log(dataValue);#}
+{#           console.log(dataName);#}
+           draw2(dataName,dataValue,dataTitle);
+      }
+     var ThirdFloor = function () {
+           var ThirdFloor = document.getElementsByName('ThirdFloor');
+           var titleThirdFloor = document.getElementsByName('titleThirdFloor')[0].innerHTML;
+{#                           console.log('11',titleThirdFloor);#}
+           var initResult = []
+           var dataName=[];
+           var dataValue=[];
+           for(var i=0;i<ThirdFloor.length;i++){
+               initResult[i] = ThirdFloor[i].innerHTML;
+               dataName[i] = initResult[i].split(":")[0];
+               dataValue[i] = initResult[i].split(":")[1];
+           }
+{#           console.log(dataName);#}
+{#           console.log(dataValue);#}
+           draw3(dataName,dataValue,titleThirdFloor);
+     }
+     var FourthFloor = function () {
+           var FourthFloor = document.getElementsByName('FourthFloor');
+           var titleFourthFloor= document.getElementsByName('titleFourthFloor')[0].innerHTML;
+           console.log('4',titleFourthFloor);
+           var initResult = []
+           var dataName=[];
+{#           var dataName1 = [];#}
+{#           var dataName2 = [];#}
+           var dataValue=[];
+           for(var i=0;i<FourthFloor.length;i++){
+                initResult[i] = FourthFloor[i].innerHTML;
+                dataName[i] = initResult[i].split(":")[0];
+{#                dataName1[i] = dataName[i].split(",")[0];#}
+{#                dataName2[i] = dataName[i].split(",")[2];#}
+                dataValue[i] = initResult[i].split(":")[1];
+           }
+{#           console.log(dataName);#}
+{#           console.log(dataName1);#}
+{#           console.log(dataName2);#}
+{#           console.log(dataValue);#}
+{#           console.log(titleFourthFloor);#}
+           draw4(dataName,dataValue,titleFourthFloor);
+      }
+
+     var draw1 = function (dataName,dataValue) {
+           var myChart = echarts.init(document.getElementById('chart1'));
+           var Check_Department = document.getElementById('Check_Department');
+           var Hand_Result = document.getElementById('Hand_Result');
+           var Responsibli_Code_two = document.getElementById('Responsibli_Code_two');
+           var submit = document.getElementById('submit');
+
+           var option = {
+                title: {
+                    text:'责任部门发现安全问题比例',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series: [{
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    name: '发卡数量',
+                    type: 'pie',
+                    data:(function (arr1,arr2) {
+                        var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                        var dataArr = [];
+                        for(var i=0;i<len;i++){
+                            var obj = new Object();
+                            obj.value = arr1[i];
+                            obj.name = arr2[i];
+                            dataArr.push(obj);
+                        }
+                        return dataArr;
+                    })(dataValue,dataName),
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+           };
+{#                              // 使用刚指定的配置项和数据显示图表。#}
+           myChart.setOption(option);
+           myChart.on('click',function (params) {
+              Check_Department.value = params.name;
+              Hand_Result.value = null;
+              Responsibli_Code_two.value = null;
+              submit.click();
+          });
+      }
+     var draw2 = function (dataName,dataValue,dataTitle) {
+           var myChart = echarts.init(document.getElementById('chart2'));
+
+           var Hand_Result = document.getElementById('Hand_Result');
+           var Responsibli_Code_two = document.getElementById('Responsibli_Code_two');
+           var submit = document.getElementById('submit');
+
+           var option = {
+                title : {
+                    text: '发卡类型占比',
+                    subtext: '发卡部门: '+dataTitle,
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series : [
+                    {
+                        name: '发卡数量',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:(function (arr1,arr2) {
+                            var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                        })(dataValue,dataName),
+{#                                            {value:dataValue[1],name:dataName[1]},#}
+{#                                            {value:dataValue[2],name:dataName[2]},#}
+{#                                            {value:dataValue[3],name:dataName[3]},#}
+{#                                            {value:dataValue[4],name:dataName[4]},#}
+{#                                            {value:dataValue[5],name:dataName[5]},#}
+{#                                        ],#}
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+           };
+           myChart.setOption(option);
+           myChart.on('click',function (params) {
+              Hand_Result.value = params.name;
+              Responsibli_Code_two.value = null;
+              submit.click();
+           });
+      }
+     var draw3 = function (dataName,dataValue,dataTitle) {
+           var myChart = echarts.init(document.getElementById('chart3'));
+
+           var Responsibli_Code_two = document.getElementById('Responsibli_Code_two');
+           var submit = document.getElementById('submit');
+
+           var option = {
+                title : {
+                    text: dataTitle,
+                    subtext: '责任部门'+dataTitle,
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series : [
+                    {
+                        name: '发卡数量',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:(function (arr1,arr2) {
+                            var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                        })(dataValue,dataName),
+{#                                            {value:dataValue[1],name:dataName[1]},#}
+{#                                            {value:dataValue[2],name:dataName[2]},#}
+{#                                            {value:dataValue[3],name:dataName[3]},#}
+{#                                            {value:dataValue[4],name:dataName[4]},#}
+{#                                            {value:dataValue[5],name:dataName[5]},#}
+{#                                        ],#}
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+           };
+           myChart.setOption(option);
+           myChart.on('click',function (params) {
+              Responsibli_Code_two.value = params.name;
+              submit.click();
+           });
+      }
+     var draw4 = function (dataName,dataValue,dataTitle) {
+           var myChart = echarts.init(document.getElementById('chart4'));
+           var option = {
+               title : {
+                    text: dataTitle,
+                    subtext: '检查人'+dataTitle,
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series : [
+                    {
+                        name: '发卡数量',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:(function (arr1,arr2) {
+                            var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                        })(dataValue,dataName),
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+           };
+
+           myChart.setOption(option);
+      }
+
+</script>
+{% endblock %}

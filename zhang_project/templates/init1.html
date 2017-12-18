@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../static/echarts.js"></script>
+</head>
+<body>
+<button onclick="test1()">绘图</button>
+<div id="main" style="width: 600px;height: 600px"></div>
+<div>
+<hr>
+<p>第一层</p>
+<hr>
+<form action="" method="post">
+    <table>
+        <tbody>
+            <tr>
+                <td>查询起始日期:</td>
+                <td><input type="text" placeholder="请输入起始日期" name="Date_Begin"></td>
+            </tr>
+            <tr>
+                <td>查询终止日期:</td>
+                <td><input type="text" placeholder="请输入终止日期" name="Date_End"></td>
+            </tr>
+            <tr>
+                <td>输入Second层参数:</td>
+                <td><input type="text" placeholder="请输入发卡类别" name="Hand_Result"></td>
+            </tr>
+            <tr>
+                <td>输入Third层参数:</td>
+                <td><input type="text" placeholder="请输入查询部门" name="Department_Type"></td>
+            </tr>
+            <tr>
+                <td>输入Fourth层参数:</td>
+                <td><input type="text" placeholder="请输入部门编号" name="Responsibli_Preson"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="查询"></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    {##}
+{% for k,v in Show_S_RESPONSIBILITYDEPT.items() %}
+{#    <p>{{ k }}</p>#}
+{#    <p>{{ v }}</p>#}
+    <p>{{ k }}:{{ v }}</p>
+{% endfor %}
+    <script type="text/javascript">
+        var test1 = function () {
+             // 基于准备好的dom，初始化echarts实例
+            var myP = document.getElementsByTagName('p');
+            var dataName =[];
+            var dataValue = [];
+            for(var i=0;i<myP.length;i++){
+                dataName[i] = myP[i].innerHTML;
+
+                if(myP[i].innerHTML==='第二层'){
+                    break;
+                }
+
+            }
+            dataName.pop();
+            console.log(dataName);
+            draw(dataName);
+
+        }
+        var draw = function (dataName) {
+             var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: 'ECharts 入门示例'
+                },
+                tooltip: {},
+{#                legend: {#}
+{#                    data:['销量']#}
+{#                },#}
+                xAxis: {
+                    type:'category',
+                    splitline:{show:false},
+                    data: dataName,
+                    axisLabel:{
+                        interval:0,
+                        rotate:30,
+                    }
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20,5, 20, 36, 10, 10, 20,5, 20, 36, 10, 10, 20,10]
+                }]
+            };
+
+{#            // 使用刚指定的配置项和数据显示图表。#}
+            myChart.setOption(option);
+        }
+
+
+    </script>
+<hr>
+{% for k1,v1 in show_S_HANDLEREASULT.items() %}
+    <p>{{ k1 }}:{{ v1 }}</p>
+{% endfor %}
+<hr>
+<p>第二层</p>
+<hr>
+{% for k2,v2 in show_S_Second_Layer_RESPONSIBILITYDEPT.items() %}
+    <p>{{ k2 }}:{{ v2 }}</p>
+{% endfor %}
+<hr>
+<p>第三层</p>
+<hr>
+{% for k3,v3 in show_S_Third_Layer_S_EMPLOYEECODE.items() %}
+    <p>{{ k3 }}:{{ v3 }}</p>
+{% endfor %}
+<hr>
+<p>第四层</p>
+<hr>
+{% for k4,v4 in show_S_Fourth_Layer_RESPONSIBLEPERSON.items() %}
+    <p>{{ k4 }}:{{ v4 }}</p>
+{% endfor %}
+</form>
+
+</div>
+
+</body>
+
+</html>

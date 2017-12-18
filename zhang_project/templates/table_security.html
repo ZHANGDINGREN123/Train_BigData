@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block title %}
+    安全源数据
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+             <div class="col-md-6">
+                <form action="" method="post">
+                    <span>查询起始日期:</span>
+                    <input type="text" placeholder="请输入起始日期" name="Date_Begin">
+                    <span>查询终止日期:</span>
+                    <input type="text" placeholder="请输入终止日期" name="Date_End">
+                    <input type="submit"  value="查询">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>安全源数据
+                        <small>各车间安全存在的安全问题</small>
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                        只显示排名前十
+                    </p>
+                    <table id="datatable" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>检查部门</th>
+                            <th>检查人</th>
+                            <th>检查时间</th>
+                            <th>责任部门</th>
+                            <th>问题描述</th>
+                            <th>责任人</th>
+                            <th>发卡类型</th>
+                            <th>违反条款</th>
+                        </tr>
+                        </thead>
+
+
+                        <tbody>
+                        <tr>
+                            <td>{{ show_S_Security_Table[0][0] }}</td>
+                            <td>{{ show_S_Security_Table[0][1] }}</td>
+                            <td>{{ show_S_Security_Table[0][2] }}</td>
+                            <td>{{ show_S_Security_Table[0][3] }}</td>
+                            <td>{{ show_S_Security_Table[0][4] }}</td>
+                            <td>{{ show_S_Security_Table[0][5] }}</td>
+                            <td>{{ show_S_Security_Table[0][7] }}</td>
+                            <td>{{ show_S_Security_Table[0][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[1][0] }}</td>
+                            <td>{{ show_S_Security_Table[1][1] }}</td>
+                            <td>{{ show_S_Security_Table[1][2] }}</td>
+                            <td>{{ show_S_Security_Table[1][3] }}</td>
+                            <td>{{ show_S_Security_Table[1][4] }}</td>
+                            <td>{{ show_S_Security_Table[1][5] }}</td>
+                            <td>{{ show_S_Security_Table[1][7] }}</td>
+                            <td>{{ show_S_Security_Table[1][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[2][0] }}</td>
+                            <td>{{ show_S_Security_Table[2][1] }}</td>
+                            <td>{{ show_S_Security_Table[2][2] }}</td>
+                            <td>{{ show_S_Security_Table[2][3] }}</td>
+                            <td>{{ show_S_Security_Table[2][4] }}</td>
+                            <td>{{ show_S_Security_Table[2][5] }}</td>
+                            <td>{{ show_S_Security_Table[2][7] }}</td>
+                            <td>{{ show_S_Security_Table[2][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[3][0] }}</td>
+                            <td>{{ show_S_Security_Table[3][1] }}</td>
+                            <td>{{ show_S_Security_Table[3][2] }}</td>
+                            <td>{{ show_S_Security_Table[3][3] }}</td>
+                            <td>{{ show_S_Security_Table[3][4] }}</td>
+                            <td>{{ show_S_Security_Table[3][5] }}</td>
+                            <td>{{ show_S_Security_Table[3][7] }}</td>
+                            <td>{{ show_S_Security_Table[3][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[4][0] }}</td>
+                            <td>{{ show_S_Security_Table[4][1] }}</td>
+                            <td>{{ show_S_Security_Table[4][2] }}</td>
+                            <td>{{ show_S_Security_Table[4][3] }}</td>
+                            <td>{{ show_S_Security_Table[4][4] }}</td>
+                            <td>{{ show_S_Security_Table[4][5] }}</td>
+                            <td>{{ show_S_Security_Table[4][7] }}</td>
+                            <td>{{ show_S_Security_Table[4][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[5][0] }}</td>
+                            <td>{{ show_S_Security_Table[5][1] }}</td>
+                            <td>{{ show_S_Security_Table[5][2] }}</td>
+                            <td>{{ show_S_Security_Table[5][3] }}</td>
+                            <td>{{ show_S_Security_Table[5][4] }}</td>
+                            <td>{{ show_S_Security_Table[5][5] }}</td>
+                            <td>{{ show_S_Security_Table[5][7] }}</td>
+                            <td>{{ show_S_Security_Table[5][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[6][0] }}</td>
+                            <td>{{ show_S_Security_Table[6][1] }}</td>
+                            <td>{{ show_S_Security_Table[6][2] }}</td>
+                            <td>{{ show_S_Security_Table[6][3] }}</td>
+                            <td>{{ show_S_Security_Table[6][4] }}</td>
+                            <td>{{ show_S_Security_Table[6][5] }}</td>
+                            <td>{{ show_S_Security_Table[6][7] }}</td>
+                            <td>{{ show_S_Security_Table[6][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[7][0] }}</td>
+                            <td>{{ show_S_Security_Table[7][1] }}</td>
+                            <td>{{ show_S_Security_Table[7][2] }}</td>
+                            <td>{{ show_S_Security_Table[7][3] }}</td>
+                            <td>{{ show_S_Security_Table[7][4] }}</td>
+                            <td>{{ show_S_Security_Table[7][5] }}</td>
+                            <td>{{ show_S_Security_Table[7][7] }}</td>
+                            <td>{{ show_S_Security_Table[7][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[8][0] }}</td>
+                            <td>{{ show_S_Security_Table[8][1] }}</td>
+                            <td>{{ show_S_Security_Table[8][2] }}</td>
+                            <td>{{ show_S_Security_Table[8][3] }}</td>
+                            <td>{{ show_S_Security_Table[8][4] }}</td>
+                            <td>{{ show_S_Security_Table[8][5] }}</td>
+                            <td>{{ show_S_Security_Table[8][7] }}</td>
+                            <td>{{ show_S_Security_Table[8][8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ show_S_Security_Table[9][0] }}</td>
+                            <td>{{ show_S_Security_Table[9][1] }}</td>
+                            <td>{{ show_S_Security_Table[9][2] }}</td>
+                            <td>{{ show_S_Security_Table[9][3] }}</td>
+                            <td>{{ show_S_Security_Table[9][4] }}</td>
+                            <td>{{ show_S_Security_Table[9][5] }}</td>
+                            <td>{{ show_S_Security_Table[9][7] }}</td>
+                            <td>{{ show_S_Security_Table[9][8] }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        var tableSecurity = document.getElementsByName('tableSecurity');
+        console.log(tableSecurity);
+    </script>
+{% endblock %}

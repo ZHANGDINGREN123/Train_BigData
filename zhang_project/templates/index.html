@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>太原火车站大数据平台 | 发卡类型数据可视化</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../static/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../static/iCheck/skins/flat/green.css" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="../static/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../static/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="../static/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../static/build/css/custom.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="../static/echarts.js"></script>
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="{{ url_for('faultyDashboard') }}" class="site_title"><i class="fa fa-paw"></i> <span style="font-size: 15px">太原火车站大数据平台</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="../static/images/sxdx.jpeg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>Sun Haiyang</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>管理</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> 主页 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ url_for('faultyDashboard') }}">故障仪表盘</a></li>
+                      <li><a href="{{ url_for('securityDashboard') }}">安全仪表盘</a></li>
+{#                      <li><a href="{{ url_for('punchDashboard') }}">打卡仪表盘</a></li>#}
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-table"></i> 表格数据 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ url_for('tableFault') }}">故障源数据</a></li>
+                      <li><a href="{{ url_for('tableSecurity') }}">安全源数据</a></li>
+{#                      <li><a href="{{ url_for('tablePunch') }}">打卡源数据</a></li>#}
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> 数据可视化 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ url_for('index') }}">发卡类型</a></li>
+                      <li><a href="{{ url_for('index2') }}">责任部门</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>其他</h3>
+                <ul class="nav side-menu">
+
+                  <li><a><i class="fa fa-windows"></i> 更多服务 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">联系我们</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> 更多功能 <span class="label label-success pull-right">努力更新</span></a></li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="#">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="../static/images/sxdx.jpeg" alt="">Sun Haiyang
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="#"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+        <!-- top tiles -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="dashboard_graph">
+
+                <div class="row x_title">
+                  <div class="col-md-6">
+                    <h3>太原火车站大数据平台 <small>数据可视化</small></h3>
+                  </div>
+                  <!--titleSettings-->
+                  <div class="col-md-6">
+                   <!--
+                   <div id="reportrange" class="pull-right" style="width: 400px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                    </div>
+                    -->
+
+                  <div>
+                      <form action="" method="post">
+                           <table>
+                                <tbody>
+                                <tr>
+                                    <td>查询起始日期:</td>
+                                    <td><input id="Date_Begin" type="text" name="Date_Begin" placeholder="输入起始时间"></td>
+                                </tr>
+                                <tr></tr>
+
+                                      <td>查询终止日期:</td>
+                                      <td><input id="Date_End" type="text" name="Date_End" placeholder="输入停止时间"></td>
+                                <tr>
+                                      <td>请输入发卡类别:</td>
+                                      <td><input id="Hand_Result" type="text" placeholder="请输入发卡类别" name="Hand_Result"></td>
+                                </tr>
+
+                                <tr>
+                                     <td>请输入查询部门:</td>
+                                     <td><input id="Department_Type" type="text" placeholder="请输入查询部门" name="Department_Type"></td>
+                                </tr>
+
+                                <tr>
+                                    <td>请输入部门编号:</td>
+                                    <td> <input id="Responsibli_Preson" type="text" placeholder="请输入部门编号" name="Responsibli_Preson"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="submit" value="提交" id="submit"></td>
+                                </tr>
+                                </tbody>
+                           </table>
+
+                      </form>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--第一层数据可视化-->
+              <div class="col-md-12 col-sm-12 col-xs-12" id="FirstFloor">
+               <!--第一层数据表格-->
+               <div class="x_panel">
+                  <div class="x_title">
+                    <h2>数据可视化<small>发卡类型</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>发卡类型</th>
+                          <th>发卡数量</th>
+                          <th>Username</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for k,v in show_S_HANDLEREASULT.items() %}
+                            <tr>
+                                <td>#</td>
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                                <td>@sxu</td>
+                            </tr>
+                          {% endfor %}
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                  <p id="dateBegin">{{ dateBegin }}</p>
+                  <p id="dateEnd">{{ dateEnd }}</p>
+                    {% for k,v in show_S_HANDLEREASULT.items() %}
+                        <p name="FirstFloor" style="display: none">{{ k }}:{{ v }}</p>
+                    {% endfor %}
+               <!--第一层数据图表-->
+               <div class="x_panel">
+                    <div class="x_title">
+                        <h2>各部门存在的安全问题</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="chart1" style="height: 300px"></div>
+                    </div>
+                </div>
+                  <hr>
+              </div>
+
+              <!--第二层数据可视化-->
+              <div class="col-md-12 col-sm-12 col-xs-12" id="FirstFloor">
+                 <!--第二层数据表格-->
+                    <div class="x_panel">
+                  <div class="x_title">
+                    <h2>责任部门<small>{{ show_S_Second_Layer_Hand_Result }}安全问题</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>责任部门</th>
+                          <th>{{ show_S_Second_Layer_Hand_Result }}发卡数量</th>
+                          <th>Username</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for k,v in show_S_Second_Layer_RESPONSIBILITYDEPT.items() %}
+                            <tr>
+                                <td>#</td>
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                                <td>@sxu</td>
+                            </tr>
+                          {% endfor %}
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+
+                    <span name="titleSecondFloor" style="display: none">{{ show_S_Second_Layer_Hand_Result }}</span>
+                    {% for k2,v2 in show_S_Second_Layer_RESPONSIBILITYDEPT.items() %}
+                        <p name="SecondFloor" style="display: none">{{ k2 }}:{{ v2 }}</p>
+                    {% endfor %}
+
+
+                <!--第二层数据图表-->
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="FirstDraw">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>各部门存在的{{ show_S_Second_Layer_Hand_Result}}问题 </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="x_content">
+                        <div id="chart2" style="height: 300px"></div>
+                    </div>
+                    </div>
+                        <hr>
+                </div>
+
+                </div>
+
+              <!--第三层数据可视化-->
+              <div class="col-md-12 col-sm-12 col-xs-12" id="FirstFloor">
+                <!--第三层数据表格-->
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>{{ show_S_Third_Layer_EmployerCode }}<small>{{ show_S_Second_Layer_Hand_Result }}安全问题</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>责任部门:{{ show_S_Third_Layer_EmployerCode }}</th>
+                          <th>{{ show_S_Second_Layer_Hand_Result }}发卡数量</th>
+                          <th>Username</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for k,v in show_S_Third_Layer_S_EMPLOYEECODE.items() %}
+                            <tr>
+                                <td>#</td>
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                                <td>@sxu</td>
+                            </tr>
+                          {% endfor %}
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                    <span name="titleThirdFloor" style="display: none;">{{ show_S_Third_Layer_EmployerCode }}</span>
+                    {% for k3,v3 in show_S_Third_Layer_S_EMPLOYEECODE.items() %}
+                        <p name="ThirdFloor" style="display: none;">{{ k3 }}:{{ v3 }}</p>
+                    {% endfor %}
+
+                <!--第三层数据图表-->
+                <div class="col-md-12 col-sm-12 col-xs-12" id="FirstDraw">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{{ show_S_Third_Layer_EmployerCode }}{{ show_S_Second_Layer_Hand_Result }}发卡比例</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    <div class="x_content">
+                        <div id="chart3" style="height: 300px"></div>
+                    </div>
+                    </div>
+                    <hr>
+                </div>
+                </div>
+
+              <!--第四层数据可视化-->
+              <div class="col-md-12 col-sm-12 col-xs-12" id="FirstFloor">
+                <!--第四层数据表格-->
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>{{ show_S_Fourth_Layer_People_Depart }}组<small>{{ show_S_Second_Layer_Hand_Result }}安全问题</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>责任部门</th>
+                          <th>{{ show_S_Second_Layer_Hand_Result }}发卡数量</th>
+                          <th>Username</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for k,v in show_S_Fourth_Layer_RESPONSIBLEPERSON.items() %}
+                            <tr>
+                                <td>#</td>
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                                <td>@sxu</td>
+                            </tr>
+                          {% endfor %}
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                    <span name="titleFourthFloor" style="display: none">{{ show_S_Fourth_Layer_People_Depart }}</span>
+                    {% for k4,v4 in show_S_Fourth_Layer_RESPONSIBLEPERSON.items() %}
+                        <p name="FourthFloor" style="display: none">{{ k4 }}:{{ v4 }}</p>
+                    {% endfor %}
+
+                <!--第四层数据图表-->
+                <div class="col-md-12 col-sm-12 col-xs-12" id="FirstDraw">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{{ show_S_Fourth_Layer_People_Depart }}组{{ show_S_Second_Layer_Hand_Result }}发卡比例</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    <div class="x_content">
+                        <div id="chart4" style="height: 300px"></div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="clearfix"></div>
+              </div>
+            </div>
+        </div>
+        <br />
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            太原火车站 - 大数据平台 <a href="#">山西大学</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    <script type="text/javascript">
+      window.onload = function () {
+           var Date_Begin = document.getElementById('Date_Begin');
+           var Date_End = document.getElementById('Date_End');
+           var Hand_Result = document.getElementById('Hand_Result');
+           var Department_Type = document.getElementById('Department_Type');
+           var Responsibli_Preson = document.getElementById('Responsibli_Preson');
+
+           var titleSecondFloor =  document.getElementsByName('titleSecondFloor');
+           var titleThirdFloor =  document.getElementsByName('titleThirdFloor');
+           var titleFourthFloor =  document.getElementsByName('titleFourthFloor');
+           var dateBegin = document.getElementById('dateBegin');
+           var dateEnd = document.getElementById('dateEnd');
+{#          console.log('titleSecondFloor',titleSecondFloor[0].innerHTML);#}
+{#          console.log('Hand_Result',Hand_Result);#}
+
+           Date_Begin.value = dateBegin.innerHTML;
+           Date_End.value = dateEnd.innerHTML;
+
+           FirstFloor();
+           var isSecond = document.getElementsByName('SecondFloor');
+           console.log(isSecond);
+           if(isSecond.length != 0){
+               SecondFloor();
+               Hand_Result.value = titleSecondFloor[0].innerHTML;
+           }
+           var isThird = document.getElementsByName('ThirdFloor');
+           if(isThird.length){
+               ThirdFloor();
+               Department_Type.value = titleThirdFloor[0].innerHTML;
+           }
+           var isFourth = document.getElementsByName('FourthFloor');
+           if(isFourth.length != 0){
+               Fourth();
+               Responsibli_Preson.value = titleFourthFloor[0].innerHTML;
+           }
+      }
+      var FirstFloor = function () {
+          var FirstFloor = document.getElementsByName('FirstFloor');
+          console.log(FirstFloor);
+          var initResult = []
+          var dataName=[];
+          var dataValue=[];
+          console.log(FirstFloor.length);
+          for(var i=0;i<FirstFloor.length;i++){
+              console.log(FirstFloor[i].innerHTML);
+              initResult[i] = FirstFloor[i].innerHTML;
+              dataName[i] = initResult[i].split(":")[0];
+              dataValue[i] = initResult[i].split(":")[1];
+{##}
+          }
+          console.log(dataValue);
+          console.log(dataName);
+          draw1(dataName,dataValue);
+      }
+      var SecondFloor = function () {
+           var SecondFloor = document.getElementsByName('SecondFloor');
+           var titleSecondFloor = document.getElementsByName('titleSecondFloor');
+           var dataTitle = titleSecondFloor[0].innerHTML;
+{#                           console.log(dataTitle);#}
+           var initResult = []
+           var dataName=[];
+           var dataValue=[];
+{#                           console.log(SecondFloor.length);#}
+           for(var i=0;i<SecondFloor.length;i++){
+               console.log(SecondFloor[i].innerHTML);
+               initResult[i] = SecondFloor[i].innerHTML;
+               dataName[i] = initResult[i].replace(/[^\u4e00-\u9fa5]/g,'');
+               dataValue[i] = initResult[i].replace(/[^\d]/g, '');
+           }
+           console.log(dataValue);
+           console.log(dataName);
+           draw2(dataName,dataValue,dataTitle);
+      }
+      var ThirdFloor = function () {
+           var ThirdFloor = document.getElementsByName('ThirdFloor');
+           var titleThirdFloor = document.getElementsByName('titleThirdFloor')[0].innerHTML;
+{#                           console.log('11',titleThirdFloor);#}
+           var initResult = []
+           var dataName=[];
+           var dataValue=[];
+           for(var i=0;i<ThirdFloor.length;i++){
+               initResult[i] = ThirdFloor[i].innerHTML;
+               dataName[i] = initResult[i].split(":")[0];
+               dataValue[i] = initResult[i].split(":")[1];
+           }
+           console.log(dataName);
+           console.log(dataValue);
+           draw3(dataName,dataValue,titleThirdFloor);
+      }
+      var Fourth = function () {
+           var FourthFloor = document.getElementsByName('FourthFloor');
+           var titleFourthFloor= document.getElementsByName('titleFourthFloor')[0].innerHTML;
+           console.log('4',FourthFloor);
+           var initResult = []
+           var dataName=[];
+           var dataValue=[];
+           for(var i=0;i<FourthFloor.length;i++){
+                initResult[i] = FourthFloor[i].innerHTML;
+                dataName[i] = initResult[i].split(":")[0];
+                dataValue[i] = initResult[i].split(":")[1];
+           }
+           console.log(dataName);
+           console.log(dataValue);
+           console.log(titleFourthFloor);
+           draw4(dataName,dataValue,titleFourthFloor);
+      }
+      var draw1 = function (dataName,dataValue) {
+           var myChart = echarts.init(document.getElementById('chart1'));
+           var Hand_Result = document.getElementById('Hand_Result');
+           var Department_Type = document.getElementById('Department_Type');
+           var Responsibli_Preson = document.getElementById('Responsibli_Preson');
+           var submit = document.getElementById('submit');
+           var option = {
+                title: {
+                    text:'责任部门发卡次数',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series: [{
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    name: '发卡数量',
+                    type: 'pie',
+                    data:(function (arr1,arr2) {
+                        var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                        var dataArr = [];
+                        for(var i=0;i<len;i++){
+                            var obj = new Object();
+                            obj.value = arr1[i];
+                            obj.name = arr2[i];
+                            dataArr.push(obj);
+                        }
+                        return dataArr;
+                    })(dataValue,dataName),
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+           };
+
+                              // 使用刚指定的配置项和数据显示图表。
+
+          myChart.setOption(option);
+          myChart.on('click',function (params) {
+              Hand_Result.value = params.name;
+              Department_Type.value = null;
+              Responsibli_Preson.value = null;
+              submit.click();
+          });
+      }
+      var draw2 = function (dataName,dataValue,dataTitle) {
+           var myChart = echarts.init(document.getElementById('chart2'));
+           var Department_Type = document.getElementById('Department_Type');
+           var Responsibli_Preson = document.getElementById('Responsibli_Preson');
+           var submit = document.getElementById('submit');
+           var option = {
+                title : {
+                    text: dataTitle,
+                    subtext: '责任部门'+dataTitle+'所占比例',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series : [
+                    {
+                        name: '发卡数量',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:(function (arr1,arr2) {
+                            var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                        })(dataValue,dataName),
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+           };
+           myChart.setOption(option);
+           myChart.on('click',function (params) {
+               Department_Type.value = params.name;
+               Responsibli_Preson.value = null;
+
+               submit.click();
+           })
+      }
+      var draw3 = function (dataName,dataValue,dataTitle) {
+           var myChart = echarts.init(document.getElementById('chart3'));
+           var Responsibli_Preson = document.getElementById('Responsibli_Preson');
+           var submit = document.getElementById('submit');
+           var option = {
+                title : {
+                    text: dataTitle,
+                    subtext: '责任部门'+dataTitle,
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series : [
+                    {
+                        name: '发卡数量',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:(function (arr1,arr2) {
+                            var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                        })(dataValue,dataName),
+{#                                            {value:dataValue[1],name:dataName[1]},#}
+{#                                            {value:dataValue[2],name:dataName[2]},#}
+{#                                            {value:dataValue[3],name:dataName[3]},#}
+{#                                            {value:dataValue[4],name:dataName[4]},#}
+{#                                            {value:dataValue[5],name:dataName[5]},#}
+{#                                        ],#}
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+           };
+           myChart.setOption(option);
+           myChart.on('click',function (params) {
+              Responsibli_Preson.value = params.name;
+              submit.click();
+           });
+      }
+      var draw4 = function (dataName,dataValue,dataTitle) {
+           var myChart = echarts.init(document.getElementById('chart4'));
+           var option = {
+               title : {
+                    text: dataTitle,
+                    subtext: '责任部门'+dataTitle,
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                toolbox:{
+                  show:true,
+                    feature:{
+                      mark:{show:true},
+                        dataView:{show:true,readOnly:false},
+                        saveAsImage:{show:true},
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: dataName
+                },
+                series : [
+                    {
+                        name: '发卡数量',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:(function (arr1,arr2) {
+                            var len = arr1.length<arr2.length?arr1.length:arr2.length;
+                            var dataArr = [];
+                            for(var i=0;i<len;i++){
+                                var obj = new Object();
+                                obj.value = arr1[i];
+                                obj.name = arr2[i];
+                                dataArr.push(obj);
+                            }
+                            return dataArr;
+                        })(dataValue,dataName),
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+           };
+
+           myChart.setOption(option);
+      }
+
+
+
+    </script>
+    <!-- jQuery -->
+    <script src="../static/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../static/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../static/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../static/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../static/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../static/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../static/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../static/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../static/Flot/jquery.flot.js"></script>
+    <script src="../static/Flot/jquery.flot.pie.js"></script>
+    <script src="../static/Flot/jquery.flot.time.js"></script>
+    <script src="../static/Flot/jquery.flot.stack.js"></script>
+    <script src="../static/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../static/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../static/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../static/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../static/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../static/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../static/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../static/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../static/moment/min/moment.min.js"></script>
+    <script src="../static/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../static/build/js/custom.min.js"></script>
+
+
+  </body>
+</html>
